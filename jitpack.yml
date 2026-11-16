@@ -1,5 +1,5 @@
 jdk:
   - openjdk17
 install:
-  - mvn -B versions:set -DnewVersion="$VERSION" -DgenerateBackupPoms=false
-  - mvn -B install -DskipTests
+  - ./mvnw -B versions:set -DnewVersion="$VERSION" -DgenerateBackupPoms=false
+  - ./mvnw -B install -DskipTests

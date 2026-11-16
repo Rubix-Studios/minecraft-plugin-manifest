@@ -1,2 +1,5 @@
 jdk:
   - openjdk17
+install:
+  - mvn -B versions:set -DnewVersion="$VERSION" -DgenerateBackupPoms=false
+  - mvn -B install -DskipTests

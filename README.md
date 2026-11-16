@@ -37,7 +37,7 @@ together.
 <plugin>
   <groupId>com.github.Spraxs</groupId>
   <artifactId>minecraft-plugin-manifest</artifactId>
-  <version>v1.0.3</version>
+  <version>v1.0.4</version>
   <executions><execution><goals><goal>write</goal></goals></execution></executions>
   <configuration>
     <versionModulePrefix>my-plugin_v</versionModulePrefix>

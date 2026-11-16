@@ -1,7 +1,11 @@
 # plugin-manifest-maven-plugin
 
 Writes `target/plugin-manifest.json` for a Minecraft plugin: what it supports and what a server
-has to provide. Hosting (Locus) reads it; nothing in it knows about Java versions or images.
+has to provide. Nothing in it knows about Java versions or images.
+
+The shape below is Locus's contract (Spraxs/locus#197): Locus reads this file to decide which
+server images to build and which options an instance offers. Change the shape here and in Locus
+together.
 
 ```json
 {
@@ -25,15 +29,15 @@ has to provide. Hosting (Locus) reads it; nothing in it knows about Java version
 ```xml
 <pluginRepositories>
   <pluginRepository>
-    <id>github</id>
-    <url>https://maven.pkg.github.com/Rubix-Studios/minecraft-plugin-manifest</url>
+    <id>jitpack</id>
+    <url>https://jitpack.io</url>
   </pluginRepository>
 </pluginRepositories>
 
 <plugin>
-  <groupId>eu.rubixcube</groupId>
-  <artifactId>plugin-manifest-maven-plugin</artifactId>
-  <version>1.0.0</version>
+  <groupId>com.github.Spraxs</groupId>
+  <artifactId>minecraft-plugin-manifest</artifactId>
+  <version>v1.0.2</version>
   <executions><execution><goals><goal>write</goal></goals></execution></executions>
   <configuration>
     <versionModulePrefix>my-plugin_v</versionModulePrefix>
@@ -53,20 +57,8 @@ Run it in the module that bundles the plugin (the one whose classpath holds `plu
 version enum). The version modules are looked for next to it (`versionModulesDirectory`, default
 `${project.basedir}/..`).
 
-## Reading the package
+## Releasing
 
-The package is private. Maven needs a server `github` in `~/.m2/settings.xml` with a GitHub token
-that has `read:packages`:
-
-```xml
-<servers><server><id>github</id><username>GITHUB_USER</username><password>TOKEN</password></server></servers>
-```
-
-In GitHub Actions of another Rubix-Studios repo, give that repo read access under the package's
-*Manage Actions access* and use `actions/setup-java` with `server-id: github`; `GITHUB_TOKEN` then
-suffices.
-
-## Publishing
-
-Push a tag `vX.Y.Z`: `.github/workflows/publish.yml` sets that version and runs `mvn deploy` to
-GitHub Packages.
+Push a tag `vX.Y.Z`. [JitPack](https://jitpack.io/#Spraxs/minecraft-plugin-manifest) builds it the
+first time someone asks for that version; no token is needed anywhere, because this repository is
+public.

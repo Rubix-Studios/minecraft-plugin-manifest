@@ -16,12 +16,6 @@
         <maven.version>3.9.9</maven.version>
     </properties>
 
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/Rubix-Studios/minecraft-plugin-manifest</url>
-        </repository>
-    </distributionManagement>
 
     <dependencies>
         <dependency>
